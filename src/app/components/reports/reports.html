@@ -1,0 +1,21 @@
+<div class="section-header">
+  <mat-icon>assessment</mat-icon>
+  <h2>Reports</h2>
+</div>
+
+<div class="tiles-grid">
+  @for (report of reports; track report.id) {
+    <mat-card class="report-tile" matRipple>
+      <mat-card-content>
+        <div class="report-top">
+          <mat-icon class="report-icon">{{ report.icon }}</mat-icon>
+          <mat-chip-set>
+            <mat-chip>{{ report.category }}</mat-chip>
+          </mat-chip-set>
+        </div>
+        <h3 class="tile-title">{{ report.title }}</h3>
+        <p class="tile-desc">{{ report.description }}</p>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

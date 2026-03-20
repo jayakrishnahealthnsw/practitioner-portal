@@ -1,0 +1,161 @@
+<div class="registration-container">
+  <div class="registration-header">
+    <img src="https://www.health.nsw.gov.au/SiteCollectionImages/nswhealth-logo-new.png"
+         alt="NSW Health" class="reg-logo"
+         onerror="this.style.display='none'">
+    <h1>Practitioner Portal Registration</h1>
+    <p class="subtitle">Complete the steps below to register for the NSW Health Practitioner Portal.
+      Your progress is saved automatically — you can leave and return at any time.</p>
+  </div>
+
+  @if (hasSavedProgress()) {
+    <div class="saved-progress-banner">
+      <mat-icon>info</mat-icon>
+      <span>You have saved progress from a previous session.</span>
+      <button mat-button color="warn" (click)="clearSavedProgress()">Start Fresh</button>
+    </div>
+  }
+
+  @if (!submitted()) {
+    <mat-stepper [selectedIndex]="data().currentStep" orientation="vertical" #stepper linear>
+
+      <!-- Step 1: Personal Details -->
+      <mat-step [completed]="data().personalDetails.firstName !== '' && data().personalDetails.lastName !== ''">
+        <ng-template matStepLabel>Personal Details</ng-template>
+        <div class="step-content">
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input matInput [(ngModel)]="data().personalDetails.firstName" required>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput [(ngModel)]="data().personalDetails.lastName" required>
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput type="date" [(ngModel)]="data().personalDetails.dateOfBirth">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Phone Number</mat-label>
+              <input matInput [(ngModel)]="data().personalDetails.phone">
+            </mat-form-field>
+          </div>
+          <div class="step-actions">
+            <button mat-flat-button color="primary" matStepperNext (click)="savePersonalDetails()">
+              Save & Continue
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Step 2: Professional Details -->
+      <mat-step [completed]="data().professionalDetails.profession !== ''">
+        <ng-template matStepLabel>Professional Details</ng-template>
+        <div class="step-content">
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Profession</mat-label>
+              <mat-select [(ngModel)]="data().professionalDetails.profession" required>
+                @for (p of professions; track p) {
+                  <mat-option [value]="p">{{ p }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Registration Number</mat-label>
+              <input matInput [(ngModel)]="data().professionalDetails.registrationNumber">
+            </mat-form-field>
+          </div>
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Organisation</mat-label>
+              <input matInput [(ngModel)]="data().professionalDetails.organisation">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Role / Position</mat-label>
+              <input matInput [(ngModel)]="data().professionalDetails.role">
+            </mat-form-field>
+          </div>
+          <div class="step-actions">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary" matStepperNext (click)="saveProfessionalDetails()">
+              Save & Continue
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Step 3: Account Details -->
+      <mat-step [completed]="data().accountDetails.email !== ''">
+        <ng-template matStepLabel>Account Setup</ng-template>
+        <div class="step-content">
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Email Address</mat-label>
+              <input matInput type="email" [(ngModel)]="data().accountDetails.email" required>
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Preferred Username</mat-label>
+              <input matInput [(ngModel)]="data().accountDetails.username" required>
+              <mat-icon matSuffix>badge</mat-icon>
+            </mat-form-field>
+          </div>
+          <div class="step-actions">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary" matStepperNext (click)="saveAccountDetails()">
+              Save & Continue
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+      <!-- Step 4: Preferences & Submit -->
+      <mat-step>
+        <ng-template matStepLabel>Preferences & Confirmation</ng-template>
+        <div class="step-content">
+          <h3>Notification Preferences</h3>
+          <div class="checkbox-group">
+            <mat-checkbox [(ngModel)]="data().preferences.notifyOperational">
+              Operational Notices
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="data().preferences.notifyServiceUpdates">
+              Service Updates
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="data().preferences.notifyAlerts">
+              Important Alerts
+            </mat-checkbox>
+          </div>
+
+          <mat-checkbox [(ngModel)]="data().preferences.agreeTerms" class="terms-checkbox" required>
+            I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
+          </mat-checkbox>
+
+          <div class="step-actions">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-flat-button color="primary"
+                    [disabled]="!data().preferences.agreeTerms"
+                    (click)="submitRegistration()">
+              Complete Registration
+            </button>
+          </div>
+        </div>
+      </mat-step>
+
+    </mat-stepper>
+  } @else {
+    <mat-card class="success-card">
+      <mat-card-content>
+        <mat-icon class="success-icon">check_circle</mat-icon>
+        <h2>Registration Complete!</h2>
+        <p>Welcome to the NSW Health Practitioner Portal. Your account has been created successfully.</p>
+        <button mat-flat-button color="primary" (click)="goToDashboard()">
+          Go to Dashboard
+        </button>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

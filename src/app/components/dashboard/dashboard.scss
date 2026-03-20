@@ -1,0 +1,29 @@
+.dashboard-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.grid-main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.grid-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

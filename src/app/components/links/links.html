@@ -1,0 +1,23 @@
+<div class="section-header">
+  <mat-icon>link</mat-icon>
+  <h2>Quick Access Links</h2>
+</div>
+
+<mat-card class="links-card">
+  <mat-card-content>
+    @for (group of groupedLinks; track group.category) {
+      <div class="link-group">
+        <h4 class="group-label">{{ group.category }}</h4>
+        <mat-nav-list>
+          @for (link of group.items; track link.id) {
+            <a mat-list-item [href]="link.url" target="_blank" rel="noopener">
+              <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
+              <span matListItemTitle>{{ link.title }}</span>
+              <mat-icon matListItemMeta>open_in_new</mat-icon>
+            </a>
+          }
+        </mat-nav-list>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>

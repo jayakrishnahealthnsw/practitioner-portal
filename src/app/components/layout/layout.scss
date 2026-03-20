@@ -1,0 +1,313 @@
+// ── NSW Design tokens ────────────────────────────────────────────
+$nsw-navy:      #002664;
+$nsw-dark:      #22272B;
+$nsw-red:       #D7153A;
+$nsw-divider:   #E4E7EB;
+$nsw-border:    #CDD3D6;
+$nsw-page-bg:   #F2F4F8;
+$nsw-dark-bg:   #22272B;
+$nsw-footer-div: rgba(255,255,255,0.2);
+
+// ── Shell wrapper ─────────────────────────────────────────────────
+.portal-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// ── NSW top banner ────────────────────────────────────────────────
+.nsw-top-banner {
+  background: $nsw-navy;
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 36px;
+  flex-shrink: 0;
+
+  .banner-gov {
+    font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+
+  .banner-links {
+    display: flex;
+    gap: 20px;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      opacity: 0.9;
+
+      mat-icon {
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+        line-height: 14px;
+      }
+
+      &:hover { text-decoration: underline; }
+    }
+  }
+}
+
+// ── Portal header ─────────────────────────────────────────────────
+.portal-header {
+  flex-shrink: 0;
+  background: #ffffff;
+  border-bottom: 1px solid $nsw-divider;
+  z-index: 1000;
+
+  .header-inner {
+    padding: 0 20px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .header-start {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    position: absolute;
+    left: 20px;
+  }
+
+  .menu-btn {
+    color: $nsw-navy;
+  }
+
+  .brand-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .brand-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: $nsw-navy;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .header-end {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    position: absolute;
+    right: 20px;
+  }
+
+  .user-menu-btn {
+    color: $nsw-navy;
+  }
+}
+
+.user-menu-header {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  strong { font-size: 14px; }
+  small  { font-size: 12px; color: #666; }
+}
+
+// ── Layout body (sidenav region) ──────────────────────────────────
+.portal-sidenav-container {
+  flex: 1;
+  position: relative;
+}
+
+// Force square corners on the Material sidenav drawer element
+.mat-drawer.portal-sidenav,
+.mat-drawer.portal-sidenav .mat-drawer-inner-container {
+  border-radius: 0 !important;
+  background: #e9ecf3 !important;
+}
+
+.portal-sidenav {
+  width: 90px;
+  background: #e9ecf3;
+  border-right: 1px solid $nsw-divider;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+
+  .sidenav-nav {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 6px 10px;
+    text-decoration: none;
+    color: #7a859a;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:hover:not(.active-link) {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+      transition: background 0.15s;
+
+      mat-icon {
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+        color: inherit;
+      }
+    }
+
+    .nav-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .nav-chevron {
+      position: absolute;
+      top: 10px;
+      right: 5px;
+      font-size: 14px;
+      width: 14px;
+      height: 14px;
+      color: #b0bac5;
+    }
+
+    &.active-link {
+      color: $nsw-navy;
+      background: rgba(0, 38, 100, 0.07);
+      box-shadow: inset 4px 0 0 $nsw-navy;
+
+      .nav-icon-wrap {
+        background: rgba(0, 38, 100, 0.10);
+
+        mat-icon { color: $nsw-navy; }
+      }
+
+      .nav-chevron { display: none; }
+
+      .nav-label {
+        font-weight: 700;
+        color: $nsw-navy;
+      }
+    }
+  }
+
+  .sidenav-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .sidenav-footer-text {
+      padding: 10px 6px;
+      font-size: 10px;
+      color: #aaa;
+      text-align: center;
+    }
+  }
+}
+
+.portal-content {
+  padding: 28px 32px;
+  background: #ffffff;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+// ── Footer ────────────────────────────────────────────────────────
+.portal-footer {
+  background: $nsw-dark-bg;
+  color: #fff;
+  padding: 24px 0;
+  flex-shrink: 0;
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-logo {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 13px;
+      &:hover { text-decoration: underline; color: #fff; }
+    }
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin: 0;
+  }
+}
+
+// ── Responsive ───────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .nsw-top-banner .banner-links { display: none; }
+
+  .portal-header {
+    .header-inner { height: 52px; padding: 0; }
+    .brand-logo   { height: 32px; }
+    .brand-text   { font-size: 14px; }
+    .header-start { left: 12px; }
+    .header-end   { right: 12px; }
+  }
+
+  .portal-content { padding: 16px 12px; }
+}
+
+@media (max-width: 480px) {
+  .portal-header .brand-logo { display: none; }
+}
+

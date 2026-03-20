@@ -1,0 +1,55 @@
+<mat-card class="providers-card">
+  <mat-card-content>
+    <div class="section-header">
+      <mat-icon>business_center</mat-icon>
+      <h2>My Clinics &amp; Administrative Staff</h2>
+    </div>
+
+    @for (clinic of clinics(); track clinic.id) {
+      <div class="clinic-card">
+        <div class="clinic-header">
+          <div class="clinic-title">
+            <mat-icon>business</mat-icon>
+            <span>{{ clinic.name }}</span>
+          </div>
+        </div>
+
+        <div class="provider-list">
+          @for (staff of clinic.delegates; track staff.id) {
+            <div class="provider-item">
+              <mat-icon>person</mat-icon>
+              <span class="provider-number">{{ staff.firstName }} {{ staff.lastName }}</span>
+              <span class="staff-role">{{ staff.role }}</span>
+              <span class="status-badge" [class]="'badge-' + staff.status">{{ staff.status }}</span>
+            </div>
+          }
+          @if (clinic.delegates.length === 0) {
+            <p class="empty-providers">No administrative staff delegated for this clinic.</p>
+          }
+        </div>
+      </div>
+    }
+
+    @if (clinics().length === 0) {
+      <p class="empty-state">No clinics added yet. Use the button below to add your first clinic.</p>
+    }
+
+    <div class="add-clinic-section">
+      <button mat-stroked-button (click)="showAddClinic.set(!showAddClinic())">
+        <mat-icon>{{ showAddClinic() ? 'close' : 'add_business' }}</mat-icon>
+        {{ showAddClinic() ? 'Cancel' : 'Add Clinic' }}
+      </button>
+
+      @if (showAddClinic()) {
+        <div class="add-inline-form">
+          <mat-form-field appearance="outline" class="inline-field">
+            <mat-label>Clinic name</mat-label>
+            <input matInput [(ngModel)]="newClinicName" placeholder="e.g. City Medical Centre" />
+          </mat-form-field>
+          <button mat-flat-button color="primary" (click)="addClinic()">Add Clinic</button>
+        </div>
+      }
+    </div>
+
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,37 @@
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+
+  mat-icon {
+    color: #002664;
+    font-size: 24px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a2e;
+  }
+}
+
+.links-card {
+  border-radius: 12px;
+}
+
+.link-group {
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  .group-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin: 8px 16px 0;
+  }
+}

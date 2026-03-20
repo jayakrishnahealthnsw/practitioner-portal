@@ -1,0 +1,40 @@
+<mat-card class="welcome-card">
+  <mat-card-content>
+    <div class="welcome-content">
+      <div class="welcome-text">
+        <h1>Welcome back, {{ user().firstName }}!</h1>
+        <p class="welcome-subtitle">
+          {{ user().role }} &middot; {{ user().organisation }}
+        </p>
+        <div class="welcome-meta">
+          <span class="meta-item">
+            <mat-icon>verified_user</mat-icon>
+            Identity: <strong>{{ user().identityStrength }}</strong>
+          </span>
+          <span class="meta-item">
+            <mat-icon>schedule</mat-icon>
+            Last login: {{ user().lastLogin | date:'medium' }}
+          </span>
+          <span class="meta-item">
+            <mat-icon>calendar_today</mat-icon>
+            {{ today | date:'fullDate' }}
+          </span>
+        </div>
+      </div>
+      <div class="welcome-right">
+        <div class="role-switcher">
+          <span class="switcher-label">Demo view:</span>
+          <button mat-flat-button [class.role-active]="user().userType === 'practitioner'" (click)="switchRole('practitioner')">
+            <mat-icon>medical_services</mat-icon> Practitioner
+          </button>
+          <button mat-flat-button [class.role-active]="user().userType === 'admin-staff'" (click)="switchRole('admin-staff')">
+            <mat-icon>admin_panel_settings</mat-icon> Admin Staff
+          </button>
+        </div>
+        <div class="welcome-icon">
+          <mat-icon>health_and_safety</mat-icon>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

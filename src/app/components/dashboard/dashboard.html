@@ -1,0 +1,18 @@
+<div class="dashboard-container">
+  <app-welcome />
+
+  <div class="dashboard-grid">
+    <section class="grid-main">
+      <app-applications id="applications" />
+      @if (user().userType === 'practitioner') {
+        <app-providers />
+      }
+      <app-delegation />
+      <app-links />
+    </section>
+
+    <aside class="grid-aside">
+      <app-notifications id="notifications" />
+    </aside>
+  </div>
+</div>

@@ -1,0 +1,114 @@
+<mat-card class="delegation-card">
+  <mat-card-content>
+    @if (user().userType === 'practitioner') {
+
+      <div class="section-header">
+        <mat-icon>manage_accounts</mat-icon>
+        <h2>Administrative Staff</h2>
+        <span class="section-count">{{ totalDelegateCount() }} staff across {{ clinics().length }} clinic{{ clinics().length === 1 ? '' : 's' }}</span>
+      </div>
+
+      @if (clinics().length === 0) {
+        <p class="empty-state">No clinics registered. Add clinics in the Providers section above.</p>
+      }
+
+      @for (clinic of clinics(); track clinic.id) {
+        <div class="clinic-section">
+          <div class="clinic-header">
+            <div class="clinic-title">
+              <mat-icon>business</mat-icon>
+              <span class="clinic-name">{{ clinic.name }}</span>
+            </div>
+            <span class="delegate-count">{{ clinic.delegates.length }} staff member{{ clinic.delegates.length === 1 ? '' : 's' }}</span>
+          </div>
+
+          @if (clinic.delegates.length > 0) {
+            <div class="staff-grid">
+              @for (delegate of clinic.delegates; track delegate.id) {
+                <div class="staff-card" [class.staff-card--requested]="delegate.status === 'requested'">
+                  <div class="staff-top">
+                    <div class="avatar">{{ delegate.firstName[0] }}{{ delegate.lastName[0] }}</div>
+                    <span class="status-badge" [class]="'badge-' + delegate.status">{{ delegate.status }}</span>
+                  </div>
+                  <div class="staff-details">
+                    <span class="name">{{ delegate.firstName }} {{ delegate.lastName }}</span>
+                    <span class="role">{{ delegate.role }}</span>
+                    <span class="email">{{ delegate.email }}</span>
+                  </div>
+                  @if (delegate.status === 'requested') {
+                    <div class="staff-actions">
+                      <button mat-flat-button color="primary" (click)="approve(delegate.id)">
+                        <mat-icon>check</mat-icon> Approve
+                      </button>
+                      <button mat-stroked-button color="warn" (click)="decline(delegate.id)">
+                        <mat-icon>close</mat-icon> Decline
+                      </button>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          } @else {
+            <p class="empty-clinic">No administrative staff delegated for this clinic.</p>
+          }
+        </div>
+      }
+
+    } @else {
+
+      <div class="section-header">
+        <mat-icon>supervisor_account</mat-icon>
+        <h2>My Practitioners</h2>
+      </div>
+
+      @if (adminDelegations().length === 0) {
+        <p class="empty-state">No practitioners added yet.</p>
+      }
+
+      <div class="practitioner-list">
+        @for (prac of adminDelegations(); track prac.id) {
+          <div class="delegate-item">
+            <div class="delegate-info">
+              <div class="avatar">{{ prac.firstName[0] }}{{ prac.lastName[0] }}</div>
+              <div class="details">
+                <span class="name">{{ prac.firstName }} {{ prac.lastName }}</span>
+                <span class="role">{{ prac.providerNumber }} &middot; {{ prac.clinicName }}</span>
+              </div>
+            </div>
+            <span class="status-badge" [class]="'badge-' + prac.status">{{ prac.status }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="add-section">
+        <button mat-stroked-button (click)="toggleAddForm()">
+          <mat-icon>{{ showAddForm() ? 'close' : 'person_add' }}</mat-icon>
+          {{ showAddForm() ? 'Cancel' : 'Add Practitioner' }}
+        </button>
+
+        @if (showAddForm()) {
+          <div class="add-form">
+            <mat-form-field appearance="outline">
+              <mat-label>Practitioner full name</mat-label>
+              <input matInput [(ngModel)]="formName" placeholder="e.g. Sarah Mitchell" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Provider number</mat-label>
+              <input matInput [(ngModel)]="formProviderNumber" placeholder="e.g. 2345678A" />
+            </mat-form-field>
+            @if (formMessage()) {
+              <p class="form-message" [class]="'msg-' + formMessage()!.type">
+                <mat-icon>{{ formMessage()!.type === 'success' ? 'check_circle' : 'error_outline' }}</mat-icon>
+                {{ formMessage()!.text }}
+              </p>
+            }
+            <button mat-flat-button color="primary" (click)="submitRequest()">
+              Submit Request
+            </button>
+          </div>
+        }
+      </div>
+
+    }
+  </mat-card-content>
+</mat-card>

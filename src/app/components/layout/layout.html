@@ -1,0 +1,106 @@
+<div class="portal-shell">
+
+  <!-- NSW Government Top Banner -->
+  <div class="nsw-top-banner">
+    <span class="banner-gov">A NSW Government website</span>
+    <nav class="banner-links" aria-label="Utility links">
+      <a href="https://www.healthpathology.health.nsw.gov.au/find-a-collection-centre" target="_blank" rel="noopener">
+        <mat-icon>location_on</mat-icon> Find a collection centre
+      </a>
+      <a href="https://www.healthpathology.health.nsw.gov.au/for-health-professionals/referrals" target="_blank" rel="noopener">
+        <mat-icon>check_box</mat-icon> We accept all referrals
+      </a>
+      <a href="https://www.healthpathology.health.nsw.gov.au/payments" target="_blank" rel="noopener">
+        <mat-icon>payment</mat-icon> Payments
+      </a>
+      <a href="https://www.healthpathology.health.nsw.gov.au/contact-us" target="_blank" rel="noopener">
+        <mat-icon>phone</mat-icon> Contact us
+      </a>
+    </nav>
+  </div>
+
+  <!-- Portal Header -->
+  <header class="portal-header">
+    <div class="header-inner">
+      <div class="header-start">
+        <button mat-icon-button (click)="toggleSidenav()" class="menu-btn" aria-label="Toggle navigation">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <img src="/nswhp-logo.png" alt="NSW Health Pathology" class="brand-logo">
+      </div>
+
+      <span class="brand-text">Practitioner Portal</span>
+
+      <div class="header-end">
+        <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-menu-btn" aria-label="User menu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <div class="user-menu-header">
+            <strong>{{ user().firstName }} {{ user().lastName }}</strong>
+            <small>{{ user().role }}</small>
+          </div>
+          <mat-divider></mat-divider>
+          <button mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span>My Profile</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Sign Out</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </header>
+
+  <!-- Body: sidenav + content -->
+  <mat-sidenav-container class="portal-sidenav-container">
+    <mat-sidenav [opened]="sidenavOpened()" [mode]="sidenavMode" class="portal-sidenav">
+      <nav class="sidenav-nav">
+        @for (item of navItems; track item.label) {
+          <a class="nav-item"
+             [routerLink]="item.route"
+             [fragment]="item.fragment ?? undefined"
+             [routerLinkActive]="item.fragment ? '' : 'active-link'"
+             [routerLinkActiveOptions]="{ exact: true }"
+             (click)="closeOnMobile()">
+            <span class="nav-icon-wrap">
+              <mat-icon>{{ item.icon }}</mat-icon>
+            </span>
+            <span class="nav-label">{{ item.label }}</span>
+            <mat-icon class="nav-chevron">chevron_right</mat-icon>
+          </a>
+        }
+      </nav>
+
+      <div class="sidenav-footer">
+        <div class="sidenav-footer-text">v1.0</div>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="portal-content">
+      <router-outlet />
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- Footer -->
+  <footer class="portal-footer">
+    <div class="footer-inner">
+      <img src="/nswhp-logo.png" alt="NSW Health Pathology" class="footer-logo">
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="#">About</a>
+        <a href="#">Privacy</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Contact</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 NSW Health Pathology. All rights reserved.</p>
+    </div>
+  </footer>
+
+</div>

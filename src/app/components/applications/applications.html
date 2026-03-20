@@ -1,0 +1,34 @@
+<div class="section-header">
+  <mat-icon>apps</mat-icon>
+  <h2>Applications <span class="self-service-badge">Self Service</span></h2>
+</div>
+
+<div class="tiles-grid">
+  @for (app of apps; track app.id) {
+    <mat-card class="app-tile" [class.restricted]="!meetsStrength(user().identityStrength, app.requiredIdentityStrength)" matRipple>
+      <mat-card-content>
+        <div class="tile-top">
+          <div class="tile-icon"
+               [style.background-color]="hasImage(app) ? '#ffffff' : (meetsStrength(user().identityStrength, app.requiredIdentityStrength) ? app.color : '#9e9e9e')"
+               [class.tile-icon--image]="hasImage(app)">
+            @if (hasImage(app)) {
+              <img [src]="app.image!" [alt]="app.title" class="tile-img" (error)="onImageError(app)">
+            } @else if (meetsStrength(user().identityStrength, app.requiredIdentityStrength)) {
+              <mat-icon>{{ app.icon }}</mat-icon>
+            } @else {
+              <mat-icon>lock</mat-icon>
+            }
+          </div>
+        </div>
+        <h4 class="tile-title">{{ app.title }}</h4>
+        <p class="tile-desc">{{ app.description }}</p>
+        @if (!meetsStrength(user().identityStrength, app.requiredIdentityStrength)) {
+          <p class="access-msg">
+            <mat-icon>info_outline</mat-icon>
+            Requires {{ app.requiredIdentityStrength }}
+          </p>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
