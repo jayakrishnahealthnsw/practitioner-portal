@@ -33,6 +33,12 @@ export class ApplicationsComponent {
     return !!app.image && !this.failedImages.has(app.id);
   }
 
+  openApp(app: ApplicationTile): void {
+    if (this.meetsStrength(this.user().identityStrength, app.requiredIdentityStrength) && app.url) {
+      window.open(app.url, '_blank', 'noopener,noreferrer');
+    }
+  }
+
   onImageError(app: ApplicationTile): void {
     this.failedImages.add(app.id);
   }

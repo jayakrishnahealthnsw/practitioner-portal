@@ -71,8 +71,8 @@
 .provider-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 8px;
+  gap: 8px;
+  padding: 6px 10px;
   background: #fff;
   border-radius: 6px;
 
@@ -83,16 +83,112 @@
     color: #999;
   }
 
-  .provider-number {
+  .staff-name {
     font-size: 13px;
     font-weight: 600;
     color: #333;
   }
 
   .staff-role {
-    flex: 1;
     font-size: 11px;
     color: #777;
+    flex: 1;
+  }
+
+  .staff-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+
+    .approve-btn, .decline-btn {
+      font-size: 12px;
+      height: 28px;
+      line-height: 28px;
+      padding: 0 10px;
+
+      mat-icon {
+        font-size: 14px;
+        width: 14px;
+        height: 14px;
+        margin-right: 2px;
+      }
+    }
+  }
+}
+
+// ── NSW DS compact action buttons (28px, 4px radius — matches Add Clinic style) ──
+
+.nsw-btn-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+
+  // Primary — solid navy (same as Add Clinic)
+  &--primary {
+    background: #002664;
+    color: #fff;
+    border-color: #002664;
+
+    &:hover {
+      background: #1a3a6e;
+      border-color: #1a3a6e;
+    }
+  }
+
+  // Outline — neutral, turns red on hover (Remove)
+  &--outline {
+    background: #fff;
+    color: #495057;
+    border-color: #cdd3de;
+
+    &:hover {
+      border-color: #d32f2f;
+      color: #d32f2f;
+    }
+  }
+
+  // Ghost — white with navy border (Decline)
+  &--ghost {
+    background: #fff;
+    color: #002664;
+    border-color: #002664;
+
+    &:hover {
+      background: #eef1f8;
+    }
+  }
+}
+
+.status-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 4px;
+  text-transform: capitalize;
+
+  &.badge-active {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &.badge-requested {
+    background: #fff3e0;
+    color: #e65100;
+  }
+
+  &.badge-suspended {
+    background: #fce4ec;
+    color: #c62828;
   }
 }
 
@@ -109,27 +205,355 @@
   padding: 8px 0 12px;
 }
 
-.add-inline-form {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin-top: 10px;
+// ── NSW DS: Add Clinic Section ──────────────────────────────────────────────
 
-  .inline-field {
-    flex: 1;
+.add-clinic-section {
+  margin-top: 20px;
+  border-top: 1px solid #e4e6eb;
+  padding-top: 16px;
+}
+
+// Trigger button — NSW DS primary CTA style
+.nsw-add-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #002664;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0 20px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
   }
 
-  button {
-    margin-top: 4px;
-    flex-shrink: 0;
+  &:hover {
+    background: #1a3a6e;
+  }
+
+  &:focus-visible {
+    outline: 3px solid #2e5de6;
+    outline-offset: 2px;
   }
 }
 
-.add-clinic-section {
-  margin-top: 14px;
+// Drawer — clean white panel with NSW left-accent strip
+.add-clinic-drawer {
+  margin-top: 12px;
+  background: #fff;
+  border: 1px solid #e4e6eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
 
-  .add-inline-form {
-    margin-top: 10px;
+// Employer clinic list section
+.drawer-section {
+  padding: 16px 16px 12px;
+}
+
+.drawer-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin: 0 0 10px;
+}
+
+.picker-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.picker-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid #f0f1f4;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #002664;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  &__name {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: #22272b;
+  }
+}
+
+// Add button in employer clinic picker — matches remove-btn style
+.picker-add-btn {
+  font-size: 12px;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 10px;
+  background: transparent;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  color: #555;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+
+  &:hover {
+    border-color: #002664;
+    color: #002664;
+  }
+}
+
+.drawer-divider {
+  height: 1px;
+  background: #e4e6eb;
+  margin: 0 16px;
+}
+
+// Register new clinic — NSW DS secondary/action row
+.nsw-register-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #002664;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: #002664;
+
+    &.chevron {
+      margin-left: auto;
+      opacity: 0.4;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &:hover {
+    background: #eef1f8;
+  }
+}
+
+// ── New clinic registration form ────────────────────────────────────────────
+
+.new-clinic-form {
+  padding: 16px;
+  background: #f9fafc;
+  border-top: 1px solid #e4e6eb;
+}
+
+.form-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.form-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #002664;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.form-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 2px;
+  border-radius: 4px;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    color: #22272b;
+    background: #e4e6eb;
+  }
+}
+
+.field-group-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin: 0 0 6px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #e4e6eb;
+}
+
+.field-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+// Plain NSW DS label-above-input fields
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-bottom: 12px;
+
+  &.form-group--grow   { flex: 2; }
+  &.form-group--state  { flex: 0 0 80px; }
+  &.form-group--postcode { flex: 0 0 96px; }
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #22272b;
+  margin-bottom: 2px;
+  letter-spacing: 0;
+}
+
+.form-hint {
+  font-size: 13px;
+  font-weight: 400;
+  color: #6b7280;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.form-input {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 14px;
+  color: #22272b;
+  background: #fff;
+  border: 1px solid #cdd3de;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: #9ca3af;
+    font-size: 13px;
+  }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+
+  &:hover {
+    border-color: #22272b;
+  }
+
+  &:focus {
+    border-color: #002664;
+    box-shadow: 0 0 0 3px rgba(0, 38, 100, 0.15);
+  }
+}
+
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7280'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 28px;
+  cursor: pointer;
+
+  option[value=""] {
+    color: #9ca3af;
+  }
+}
+
+.required {
+  color: #b81237;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e4e6eb;
+}
+
+// NSW ghost button
+.nsw-btn-ghost {
+  background: transparent;
+  border: 1px solid #cdd3de;
+  color: #495057;
+  border-radius: 4px;
+  padding: 0 18px;
+  height: 38px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+
+  &:hover {
+    border-color: #6b7280;
+    color: #22272b;
+  }
+}
+
+// NSW primary button
+.nsw-btn-primary {
+  background: #002664;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0 20px;
+  height: 38px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover:not(:disabled) {
+    background: #1a3a6e;
+  }
+
+  &:disabled {
+    background: #c0c8d8;
+    cursor: not-allowed;
   }
 }
 

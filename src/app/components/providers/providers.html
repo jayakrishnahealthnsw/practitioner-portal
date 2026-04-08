@@ -12,15 +12,34 @@
             <mat-icon>business</mat-icon>
             <span>{{ clinic.name }}</span>
           </div>
+          @if (clinic.delegates.length === 0) {
+            <button class="nsw-btn-sm nsw-btn-sm--outline" (click)="removeClinic(clinic.id)">
+              Remove
+            </button>
+          }
         </div>
 
         <div class="provider-list">
           @for (staff of clinic.delegates; track staff.id) {
             <div class="provider-item">
               <mat-icon>person</mat-icon>
-              <span class="provider-number">{{ staff.firstName }} {{ staff.lastName }}</span>
+              <span class="staff-name">{{ staff.firstName }} {{ staff.lastName }}</span>
               <span class="staff-role">{{ staff.role }}</span>
-              <span class="status-badge" [class]="'badge-' + staff.status">{{ staff.status }}</span>
+              <div class="staff-actions">
+                <button class="nsw-btn-sm nsw-btn-sm--outline" (click)="removeStaff(clinic.id, staff.id)">
+                  Remove
+                </button>
+                @if (staff.status === 'requested') {
+                  <button class="nsw-btn-sm nsw-btn-sm--primary" (click)="approve(staff.id)">
+                    Approve
+                  </button>
+                  <button class="nsw-btn-sm nsw-btn-sm--ghost" (click)="decline(staff.id)">
+                    Decline
+                  </button>
+                } @else {
+                  <span class="status-badge" [class]="'badge-' + staff.status">{{ staff.status }}</span>
+                }
+              </div>
             </div>
           }
           @if (clinic.delegates.length === 0) {
@@ -35,18 +54,102 @@
     }
 
     <div class="add-clinic-section">
-      <button mat-stroked-button (click)="showAddClinic.set(!showAddClinic())">
-        <mat-icon>{{ showAddClinic() ? 'close' : 'add_business' }}</mat-icon>
-        {{ showAddClinic() ? 'Cancel' : 'Add Clinic' }}
+      <button class="nsw-add-trigger" (click)="showAddClinic.set(!showAddClinic())">
+        @if (showAddClinic()) {
+          <mat-icon>close</mat-icon> Cancel
+        } @else {
+          <mat-icon>add</mat-icon> Add Clinic
+        }
       </button>
 
       @if (showAddClinic()) {
-        <div class="add-inline-form">
-          <mat-form-field appearance="outline" class="inline-field">
-            <mat-label>Clinic name</mat-label>
-            <input matInput [(ngModel)]="newClinicName" placeholder="e.g. City Medical Centre" />
-          </mat-form-field>
-          <button mat-flat-button color="primary" (click)="addClinic()">Add Clinic</button>
+        <div class="add-clinic-drawer">
+
+          @if (availableClinics().length > 0) {
+            <div class="drawer-section">
+              <p class="drawer-section-label">Your employer clinics</p>
+              <div class="picker-list">
+                @for (ec of availableClinics(); track ec.id) {
+                  <div class="picker-row">
+                    <div class="picker-row__dot"></div>
+                    <span class="picker-row__name">{{ ec.name }}</span>
+                    <button class="picker-add-btn" (click)="addClinicFromList(ec.name)">
+                      Add
+                    </button>
+                  </div>
+                }
+              </div>
+            </div>
+            <div class="drawer-divider"></div>
+          }
+
+          @if (!showManualForm()) {
+            <button class="nsw-register-btn" (click)="showManualForm.set(true)">
+              <mat-icon>domain_add</mat-icon>
+              Register new clinic
+              <mat-icon class="chevron">chevron_right</mat-icon>
+            </button>
+          }
+
+          @if (showManualForm()) {
+            <div class="new-clinic-form">
+
+              <div class="form-section-header">
+                <span class="form-section-title">Register New Clinic</span>
+                <button class="form-close-btn" (click)="resetManualForm()" title="Cancel">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Medicare Provider No. (MPN) <span class="required">*</span></label>
+                <span class="form-hint">Your 8-character Medicare provider number for this clinic</span>
+                <input class="form-input" [(ngModel)]="newClinic.medicareProviderNumber" placeholder="e.g. 2345678A" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Clinic Name <span class="required">*</span></label>
+                <span class="form-hint">Full registered name of the clinic</span>
+                <input class="form-input" [(ngModel)]="newClinic.name" placeholder="e.g. City Medical Centre" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Street Address</label>
+                <input class="form-input" [(ngModel)]="newClinic.address" placeholder="e.g. 123 George Street" />
+              </div>
+              <div class="field-row">
+                <div class="form-group form-group--grow">
+                  <label class="form-label">Suburb</label>
+                  <input class="form-input" [(ngModel)]="newClinic.suburb" placeholder="e.g. Sydney" />
+                </div>
+                <div class="form-group form-group--state">
+                  <label class="form-label">State</label>
+                  <select class="form-input form-select" [(ngModel)]="newClinic.state">
+                    <option value=""></option>
+                    <option value="ACT">ACT</option>
+                    <option value="NSW">NSW</option>
+                    <option value="NT">NT</option>
+                    <option value="QLD">QLD</option>
+                    <option value="SA">SA</option>
+                    <option value="TAS">TAS</option>
+                    <option value="VIC">VIC</option>
+                    <option value="WA">WA</option>
+                  </select>
+                </div>
+                <div class="form-group form-group--postcode">
+                  <label class="form-label">Postcode</label>
+                  <input class="form-input" [(ngModel)]="newClinic.postcode" maxlength="4" />
+                </div>
+              </div>
+
+              <div class="form-footer">
+                <button class="nsw-btn-ghost" (click)="resetManualForm()">Cancel</button>
+                <button class="nsw-btn-primary" [disabled]="!newClinic.name.trim() || !newClinic.medicareProviderNumber.trim()" (click)="addClinicManual()">
+                  Submit Clinic
+                </button>
+              </div>
+
+            </div>
+          }
+
         </div>
       }
     </div>

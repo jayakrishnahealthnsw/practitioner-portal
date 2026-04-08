@@ -5,7 +5,7 @@
 
 <div class="tiles-grid">
   @for (app of apps; track app.id) {
-    <mat-card class="app-tile" [class.restricted]="!meetsStrength(user().identityStrength, app.requiredIdentityStrength)" matRipple>
+    <mat-card class="app-tile" [class.restricted]="!meetsStrength(user().identityStrength, app.requiredIdentityStrength)" matRipple (click)="openApp(app)">
       <mat-card-content>
         <div class="tile-top">
           <div class="tile-icon"

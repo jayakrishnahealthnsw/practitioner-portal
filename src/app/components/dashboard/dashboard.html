@@ -7,7 +7,9 @@
       @if (user().userType === 'practitioner') {
         <app-providers />
       }
-      <app-delegation />
+      @if (user().userType === 'admin-staff') {
+        <app-delegation />
+      }
       <app-links />
     </section>
 

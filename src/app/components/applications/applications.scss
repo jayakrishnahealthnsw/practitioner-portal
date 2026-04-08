@@ -145,6 +145,18 @@
     line-height: 1.4;
   }
 
+  .tile-info-badge {
+    display: inline-block;
+    background: #2b4f9e;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.2px;
+    margin-bottom: 6px;
+  }
+
   .access-msg {
     display: flex;
     align-items: center;

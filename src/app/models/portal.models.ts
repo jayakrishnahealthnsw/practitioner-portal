@@ -54,6 +54,9 @@ export interface Clinic {
   name: string;
   providerNumbers: ProviderNumber[];
   delegates: DelegateStaff[];
+  ahpraNumber?: string;
+  medicareProviderNumber?: string;
+  address?: string;
 }
 
 export interface DelegatedPractitioner {

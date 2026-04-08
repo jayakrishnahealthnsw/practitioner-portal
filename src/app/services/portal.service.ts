@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import {
   PractitionerUser,
   ApplicationTile,
@@ -39,6 +39,13 @@ const DEMO_ADMIN: PractitionerUser = {
   registrationComplete: true,
   notificationPreferences: { operational: true, serviceUpdates: false, alerts: true }
 };
+
+const EMPLOYER_CLINICS = [
+  { id: 'emp-1', name: 'Sydney CBD Medical Centre' },
+  { id: 'emp-2', name: 'Westfield Family Practice' },
+  { id: 'emp-3', name: 'Bondi Junction Medical Practice' },
+  { id: 'emp-4', name: 'Chatswood Health Centre' }
+];
 
 const KNOWN_PRACTITIONERS = [
   { id: 'USR-001', firstName: 'Sarah', lastName: 'Mitchell', providerNumber: '2345678A', clinicName: 'Sydney CBD Medical Centre' },
@@ -96,6 +103,13 @@ export class PortalService {
     return this._clinics.asReadonly();
   }
 
+  getAvailableEmployerClinics() {
+    return computed(() => {
+      const addedNames = new Set(this._clinics().map(c => c.name.toLowerCase()));
+      return EMPLOYER_CLINICS.filter(ec => !addedNames.has(ec.name.toLowerCase()));
+    });
+  }
+
   getAdminDelegations() {
     return this._adminDelegations.asReadonly();
   }
@@ -116,14 +130,14 @@ export class PortalService {
             description: 'Access patient pathology records and results',
             icon: 'local_hospital',
             image: '/pathworks.png',
-            url: '/applications/pathworks',
+            url: 'https://nap-mono-25794994.figma.site/welcome',
             color: '#1565C0',
             requiredIdentityStrength: 'IP2+'
           },
           {
             id: 'app-healthlink',
             title: 'HealthLink',
-            description: 'Secure clinical messaging and results delivery',
+            description: 'Configuration of result delivery',
             icon: 'link',
             image: '/HealthLink.png',
             url: '/applications/healthlink',
@@ -135,12 +149,16 @@ export class PortalService {
     ];
   }
 
-  addClinic(name: string): void {
+  addClinic(name: string, meta?: { ahpraNumber?: string; medicareProviderNumber?: string; address?: string }): void {
+    const mpn = meta?.medicareProviderNumber?.trim();
     this._clinics.update(list => [...list, {
       id: `clinic-${Date.now()}`,
       name: name.trim(),
-      providerNumbers: [],
-      delegates: []
+      providerNumbers: mpn ? [{ id: `pn-${Date.now()}`, number: mpn, status: 'active' as ProviderStatus }] : [],
+      delegates: [],
+      ahpraNumber: meta?.ahpraNumber,
+      medicareProviderNumber: mpn,
+      address: meta?.address
     }]);
   }
 
@@ -202,6 +220,22 @@ export class PortalService {
     this._adminDelegations.update(list =>
       list.map(d => d.id === delegateId ? { ...d, status: 'suspended' as DelegationStatus } : d)
     );
+  }
+
+  removeDelegate(clinicId: string, delegateId: string): void {
+    this._clinics.update(clinics =>
+      clinics.map(c => c.id === clinicId
+        ? { ...c, delegates: c.delegates.filter(d => d.id !== delegateId) }
+        : c
+      )
+    );
+    this._adminDelegations.update(list =>
+      list.filter(d => d.id !== delegateId)
+    );
+  }
+
+  removeClinic(clinicId: string): void {
+    this._clinics.update(clinics => clinics.filter(c => c.id !== clinicId));
   }
 
   getReports(): ReportTile[] {
