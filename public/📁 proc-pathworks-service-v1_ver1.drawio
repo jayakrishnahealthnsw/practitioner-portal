@@ -1,0 +1,118 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="MfosU25x0D5X0I8IuAke">
+    <mxGraphModel dx="774" dy="463" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mYahroJEOmsVqh7D2sBU-18" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="682" width="430" x="140" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p0" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#002664;strokeColor=#001a4d;fontColor=#ffffff;fontSize=11;fontStyle=1;align=left;spacingLeft=8;" value="📁 proc-pathworks-service-v1 / src/" vertex="1">
+          <mxGeometry height="28" width="310" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;align=left;spacingLeft=8;" value="📁 database/" vertex="1">
+          <mxGeometry height="28" width="200" x="60" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="2" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p0" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p11" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 database.module.ts" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="3" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p1" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p12" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 database.service.ts  ·  Kysely connection factory" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="118" as="geometry" />
+        </mxCell>
+        <mxCell id="4" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p1" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p13" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;align=left;spacingLeft=8;" value="📁 migrations/  ·  numbered SQL migration files" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="154" as="geometry" />
+        </mxCell>
+        <mxCell id="5" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p1" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;align=left;spacingLeft=8;" value="📁 user/" vertex="1">
+          <mxGeometry height="28" width="200" x="60" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="6" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p0" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p21" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 user.controller.ts  ·  internal endpoints only" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="234" as="geometry" />
+        </mxCell>
+        <mxCell id="7" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p2" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p22" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 user.service.ts  ·  registration, profile CRUD, status management" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="8" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p2" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p23" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 user.repository.ts  ·  Kysely: User, UserProfile, UserIdentifierPreference" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="306" as="geometry" />
+        </mxCell>
+        <mxCell id="9" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p2" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;align=left;spacingLeft=8;" value="📁 watchlist/" vertex="1">
+          <mxGeometry height="28" width="200" x="60" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="10" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p0" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p31" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 watchlist.service.ts  ·  personal + shared watchlist logic" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="386" as="geometry" />
+        </mxCell>
+        <mxCell id="11" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p3" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p32" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 watchlist.repository.ts  ·  Kysely: Watchlist, SharedWatchlist" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="422" as="geometry" />
+        </mxCell>
+        <mxCell id="12" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p3" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p33" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 watchlist-patient.service.ts  ·  add/remove/update patients" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="458" as="geometry" />
+        </mxCell>
+        <mxCell id="13" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p3" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p34" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 watchlist-patient.repository.ts" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="494" as="geometry" />
+        </mxCell>
+        <mxCell id="14" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p3" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;align=left;spacingLeft=8;" value="📁 search-history/" vertex="1">
+          <mxGeometry height="28" width="200" x="60" y="538" as="geometry" />
+        </mxCell>
+        <mxCell id="15" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p0" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p41" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 search-history.repository.ts  ·  Kysely: SearchHistory table" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="574" as="geometry" />
+        </mxCell>
+        <mxCell id="16" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p4" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;fontStyle=1;align=left;spacingLeft=8;" value="📁 audit/" vertex="1">
+          <mxGeometry height="28" width="200" x="60" y="618" as="geometry" />
+        </mxCell>
+        <mxCell id="17" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p0" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p51" parent="mYahroJEOmsVqh7D2sBU-18" style="rounded=0;html=1;fillColor=#f5f5f5;strokeColor=#cccccc;fontSize=9;align=left;spacingLeft=8;fontColor=#333333;" value="📄 audit.repository.ts  ·  AccessionAccessRecord, BreakTheGlassLog" vertex="1">
+          <mxGeometry height="28" width="340" x="90" y="654" as="geometry" />
+        </mxCell>
+        <mxCell id="18" edge="1" parent="mYahroJEOmsVqh7D2sBU-18" source="p5" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=1;exitDx=14;exitDy=0;entryX=0;entryY=0.5;rounded=0;endArrow=none;endFill=0;strokeColor=#555555;" target="p51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
